@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 
 import { NAVBAR_HEIGHT } from '../../template';
 
@@ -17,10 +18,15 @@ const styles = {
   navBarBtn: {
     backgroundColor: 'inherit',
     border: 'none',
+    fontWeight: 'bold',
+    fontSize: 15,
+    ':hover': {
+      cursor: 'pointer',
+    },
   },
 };
 
-export default class NavBar extends Component {
+class NavBar extends Component {
   componentDidMount() {
     window.onscroll = function() {
       let navBar = document.getElementById('navBar');
@@ -28,7 +34,7 @@ export default class NavBar extends Component {
       if (window.pageYOffset === 0) {
         navBar.style.boxShadow = null;
         navBar.style.backgroundImage = 'inherit';
-      } else if (window.pageYOffset > 100) {
+      } else if (window.pageYOffset > 200) {
         navBar.style.boxShadow = '0px 3px 5px black';
         navBar.style.backgroundImage =
           'linear-gradient(to right, white, #bce0ee)';
@@ -43,9 +49,20 @@ export default class NavBar extends Component {
   render() {
     return (
       <nav id="navBar" style={styles.navBar}>
-        <span>MyAdventure</span>
-        <button style={styles.navBarBtn}>Se connecter</button>
+        <span
+          style={{
+            alignSelf: 'center',
+            marginLeft: 10,
+            userSelect: 'none',
+            MozUserSelect: 'none',
+          }}
+        >
+          MyAdventure
+        </span>
+        <button style={styles.navBarBtn}>Mon Compte</button>
       </nav>
     );
   }
 }
+
+export default Radium(NavBar);
